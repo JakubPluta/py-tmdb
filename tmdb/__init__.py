@@ -2,6 +2,7 @@ import os
 import requests
 from tmdb.exceptions import *
 
+
 API_KEY = os.environ.get('TMDB', None)
 
 
@@ -25,3 +26,4 @@ SESSION = requests.Session()
 SESSION.params['api_key'] = API_KEY
 SESSION.params['language'] = "en-EN"
 SESSION.headers = HEADERS
+
