@@ -51,14 +51,13 @@ class TMDBClient:
         return f"{self._base_url}{self.ENDPOINT_URLS[endpoint]}"
 
     def _get_movie_id_path(self, endpoint):
+        # FIXME ADD ERROR HANDLING FOR CASES WHEN MOVIE ID DOESN'T EXIST
         return self._build_url_path(endpoint).format(movie_id=self.movie_id)
 
     def _make_request(self, method, url, params: dict = None, data: dict = None, resp_json=True):
         data = json.dumps(data) if data else data
-
         if not self._session:
             self._session = SessionFactory.create_session()
-
         response = self._session.request(method, url, params, data)
         response.raise_for_status()
         if resp_json:
