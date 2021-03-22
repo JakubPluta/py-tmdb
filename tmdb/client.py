@@ -2,7 +2,7 @@ import json
 import requests
 from . import SESSION, HEADERS, API_KEY
 from .const import BASE_URL, API_VERSION, GET, POST, PUT, DELETE
-
+import weakref
 
 class SessionFactory:
     @classmethod
@@ -15,6 +15,7 @@ class SessionFactory:
 
 class TMDBClient:
 
+    _CACHE = weakref.WeakKeyDictionary()
     _ENDPOINT = None
     ENDPOINT_URLS = {}
 
@@ -22,6 +23,7 @@ class TMDBClient:
         self._session = session
         self._api_version = API_VERSION
         self._base_url = BASE_URL + self._api_version
+
 
     @property
     def version(self):
@@ -47,12 +49,15 @@ class TMDBClient:
         if self._session and self._session.params is not None:
             return self._session.params
 
+    @property
+    def endpoints(self):
+        return self.ENDPOINT_URLS
+
     def _build_url_path(self, endpoint):
         return f"{self._base_url}{self.ENDPOINT_URLS[endpoint]}"
 
     def _get_movie_id_path(self, endpoint):
-        # FIXME ADD ERROR HANDLING FOR CASES WHEN MOVIE ID DOESN'T EXIST
-        return self._build_url_path(endpoint).format(movie_id=self.movie_id)
+        return self._build_url_path(endpoint).format(movie_id=self._movie_id)
 
     def _make_request(self, method, url, params: dict = None, data: dict = None, resp_json=True):
         data = json.dumps(data) if data else data
