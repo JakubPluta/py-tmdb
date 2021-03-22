@@ -2,7 +2,7 @@ import json
 import requests
 from . import SESSION, HEADERS, API_KEY
 from .const import BASE_URL, API_VERSION, GET, POST, PUT, DELETE
-import weakref
+
 
 class SessionFactory:
     @classmethod
@@ -15,7 +15,6 @@ class SessionFactory:
 
 class TMDBClient:
 
-    _CACHE = weakref.WeakKeyDictionary()
     _ENDPOINT = None
     ENDPOINT_URLS = {}
 

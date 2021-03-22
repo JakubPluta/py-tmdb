@@ -1,6 +1,6 @@
 from tmdb.client import TMDBClient
 from tmdb.const import ENDPOINTS
-
+from functools import lru_cache
 
 class Movies(TMDBClient):
 
@@ -20,6 +20,7 @@ class Movies(TMDBClient):
         if isinstance(movie_id, int):
             self._movie_id = movie_id
 
+    @lru_cache(maxsize=100)
     def movie_info(self, **kwargs):
 
         """Get the primary information about a movie.
@@ -47,6 +48,7 @@ class Movies(TMDBClient):
         resp = self._get_method(path, kwargs)
         return resp
 
+    @lru_cache(maxsize=100)
     def account_states(self, **kwargs):
         """
         Grab the following account states for a session:
@@ -72,6 +74,7 @@ class Movies(TMDBClient):
         resp = self._get_method(path, kwargs)
         return resp
 
+    @lru_cache(maxsize=100)
     def alternative_titles(self, **kwargs):
         """
         Get all of the alternative titles for a movie.
@@ -89,6 +92,7 @@ class Movies(TMDBClient):
         resp = self._get_method(path, kwargs)
         return resp
 
+    @lru_cache(maxsize=100)
     def changes(self, **kwargs):
         """
         Get the changes for a movie. By default only the last 24 hours are returned.
@@ -118,6 +122,7 @@ class Movies(TMDBClient):
         resp = self._get_method(path, kwargs)
         return resp
 
+    @lru_cache(maxsize=100)
     def credits(self, **kwargs):
         """
         Get the cast and crew for a movie.
@@ -139,6 +144,7 @@ class Movies(TMDBClient):
         resp = self._get_method(path, kwargs)
         return resp
 
+    @lru_cache(maxsize=100)
     def external_ids(self, **kwargs):
         """
         Get the external ids for a movie. We currently support the following external sources.
@@ -157,6 +163,7 @@ class Movies(TMDBClient):
         resp = self._get_method(path, kwargs)
         return resp
 
+    @lru_cache(maxsize=100)
     def images(self, **kwargs):
         """
         Get the images that belong to a movie.
@@ -185,6 +192,7 @@ class Movies(TMDBClient):
         resp = self._get_method(path, kwargs)
         return resp
 
+    @lru_cache(maxsize=100)
     def keywords(self, **kwargs):
         """
         Get the keywords that have been added to a movie.
@@ -198,6 +206,7 @@ class Movies(TMDBClient):
         resp = self._get_method(path, kwargs)
         return resp
 
+    @lru_cache(maxsize=100)
     def translations(self, **kwargs):
         """
         Get a list of translations that have been created for a movie.
@@ -211,6 +220,7 @@ class Movies(TMDBClient):
         resp = self._get_method(path, kwargs)
         return resp
 
+    @lru_cache(maxsize=100)
     def videos(self, **kwargs):
         """
         Get the videos that have been added to a movie.
@@ -232,6 +242,7 @@ class Movies(TMDBClient):
         resp = self._get_method(path, kwargs)
         return resp
 
+    @lru_cache(maxsize=100)
     def watch_providers(self, **kwargs):
         """
         Powered by our partnership with JustWatch,
@@ -252,6 +263,7 @@ class Movies(TMDBClient):
         resp = self._get_method(path, kwargs)
         return resp
 
+    @lru_cache(maxsize=100)
     def lists(self, **kwargs):
         """
         Get a list of lists that this movie belongs to.
@@ -278,6 +290,7 @@ class Movies(TMDBClient):
         resp = self._get_method(path, kwargs)
         return resp
 
+    @lru_cache(maxsize=100)
     def recommendations(self, **kwargs):
         """
         Get a list of recommended movies for a movie.
@@ -304,6 +317,7 @@ class Movies(TMDBClient):
         resp = self._get_method(path, kwargs)
         return resp
 
+    @lru_cache(maxsize=100)
     def release_dates(self, **kwargs):
         """
         Get the release date along with the certification for a movie.
@@ -323,6 +337,7 @@ class Movies(TMDBClient):
         resp = self._get_method(path, kwargs)
         return resp
 
+    @lru_cache(maxsize=100)
     def reviews(self, **kwargs):
         """
         Get the user reviews for a movie.
@@ -349,6 +364,7 @@ class Movies(TMDBClient):
         resp = self._get_method(path, kwargs)
         return resp
 
+    @lru_cache(maxsize=100)
     def similar_movies(self, **kwargs):
         """
         Get a list of similar movies. This is not the same as the "Recommendation" system you see on the website.
@@ -376,6 +392,7 @@ class Movies(TMDBClient):
         resp = self._get_method(path, kwargs)
         return resp
 
+    @lru_cache(maxsize=100)
     def rating(self, **kwargs):
         """
         Rate a movie.
@@ -406,6 +423,7 @@ class Movies(TMDBClient):
 
         return resp
 
+    @lru_cache(maxsize=100)
     def delete_rating(self, **kwargs):
         """
         Remove your rating for a movie
@@ -436,6 +454,7 @@ class Movies(TMDBClient):
 
         return resp
 
+    @lru_cache(maxsize=100)
     def latest(self, **kwargs):
         """
         Get the most newly created movie.
@@ -458,6 +477,7 @@ class Movies(TMDBClient):
         resp = self._get_method(path, kwargs)
         return resp
 
+    @lru_cache(maxsize=100)
     def now_playing(self, **kwargs):
         """
         Get a list of movies in theatres.
@@ -493,6 +513,7 @@ class Movies(TMDBClient):
         resp = self._get_method(path, kwargs)
         return resp
 
+    @lru_cache(maxsize=100)
     def popular(self, **kwargs):
         """
         Get a list of the current popular movies on TMDb. This list updates daily.
@@ -523,6 +544,7 @@ class Movies(TMDBClient):
         resp = self._get_method(path, kwargs)
         return resp
 
+    @lru_cache(maxsize=100)
     def top_rated(self, **kwargs):
         """
         Get the top rated movies on TMDb.
@@ -553,6 +575,7 @@ class Movies(TMDBClient):
         resp = self._get_method(path, kwargs)
         return resp
 
+    @lru_cache(maxsize=100)
     def upcoming(self, **kwargs):
         """
         Get a list of upcoming movies in theatres. This is a release
